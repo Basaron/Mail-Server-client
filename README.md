@@ -22,7 +22,11 @@ https://ubuntu.com/download/desktop
 
 Setup and Simulation
 ---------------------
+c++ -o Client MailClient.cpp -std=gnu++2a -pthread
+./Client
 
+c++ -o Server MailServer.cpp -std=gnu++2a -pthread
+./Server
 
 Authors and contributions
 --------------------------
