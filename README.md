@@ -39,7 +39,8 @@ If the above does not run the server and client executable, you must run a few i
  - g++  
  - ASIO Standalone  
  - pThreads  
-
+ 
+ For help installing these please take a look at the references specified at the Installation Guide in the Final Report document.  
 
 Once these installations have been made you will have to compile the system before running the executable files. To compile use the following commands:  
 Clients:  
