@@ -34,11 +34,11 @@ Authors and contributors to this project are:
 
 Name: Emil Chao Hu  
 Email: au649481@post.au.dk  
-StudyID: 201909692
+StudyID: 201909692  
 
-Name: Bastian Aaron Kramer
-Email: au644652@post.au.dk
-StudyID: 201908709
+Name: Bastian Aaron Kramer  
+Email: au644652@post.au.dk  
+StudyID: 201908709  
 
 Name: Magnus Trøjgård Tang  
 Email: au638475@post.au.dk  
