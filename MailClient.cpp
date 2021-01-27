@@ -59,6 +59,8 @@ int main()
                         char Message[60];
                         msg >> Message;
                         std::cout << Message << std::endl;
+
+                        std::cout << "Press enter button to continue" << std::endl;
                         std::cin.get();
                         std::cin.get();
                         menu = -1;

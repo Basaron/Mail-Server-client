@@ -257,6 +257,8 @@ protected:
 			std::fstream contactFile;
 			contactFile.open("contacts.txt", std::ios::in);
 
+			
+
 			while (std::getline(contactFile, contact))
 			{
 				//initialize c1 and c2 to the two client id's in a contact
@@ -266,6 +268,7 @@ protected:
 				//If myID is one of the c1 or c2
 				if (myIDstr == c1 || myIDstr == c2)
 				{
+					
 					//ID of the connection between c1 and c2
 					std::string contactID = contact.substr(12, 10);
 					std::string mails;
@@ -277,6 +280,7 @@ protected:
 						//compare filename and mail
 						if (strcmp(fileName.c_str(), mails.c_str()) == 0)
 						{
+							std::cout << "hello";							
 							//remove the string containing the mail
 							std::string deletinator5000 = contactID + "/" + mails;
 							std::remove(deletinator5000.c_str());

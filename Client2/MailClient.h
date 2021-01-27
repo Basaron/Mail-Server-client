@@ -67,9 +67,9 @@ void MailClient::sendMail(mailType mT, char topicMail[51]) //input: enum class t
         std::string fileName;
         tooString >> fileName;
 
-        //open the desired file inside the send_mail directory
+        //open the desired file inside the sent_mail directory
         //if the file is not there, then the file is made (however it is expected it is already there, since a topic is send as input) 
-        std::ifstream mailFile ("Send_Mails/" + fileName + ".txt");
+        std::ifstream mailFile ("Sent_Mails/" + fileName + ".txt");
         getline (mailFile, mail); //getting the content/text in the mail 
         mailFile.close(); 
     }
@@ -131,7 +131,7 @@ void MailClient::sendMail(mailType mT, char topicMail[51]) //input: enum class t
 
     //getting the topic of the mail 
     std::fstream content; //content is an txt file that holds all the topics of the mails 
-	content.open("Send_Mails/content.txt", std::fstream::app); //app makes sure no overrides happen 
+	content.open("Sent_Mails/content.txt", std::fstream::app); //app makes sure no overrides happen 
 	content << topicMail << "\n";
     content.close();
 
@@ -178,7 +178,7 @@ void MailClient::displayDraftMAils()
         std::cout << "The Draft folder is empty" << std::endl;
         content.close();
 
-        std::cout << "Press any button to continue" << std::endl;
+        std::cout << "Press enter button to continue" << std::endl;
         std::cin.get();
         std::cin.get(); 
         return;
@@ -255,7 +255,7 @@ void MailClient::displaySentMails()
     {
         std::cout << "The Sent_Mails folder is empty" << std::endl;
         content.close();
-        std::cout << "Press any button to continue" << std::endl;
+        std::cout << "Press enter button to continue" << std::endl;
         std::cin.get();
         std::cin.get();
         return;
@@ -269,7 +269,7 @@ void MailClient::displaySentMails()
 
     std::string mailText;
     std::fstream mailToDisplay;
-	mailToDisplay.open("Send_Mails/" + sentMails[numMail] + ".txt", std::ios::in);
+	mailToDisplay.open("Sent_Mails/" + sentMails[numMail], std::ios::in);
     std::cout << "Mail content:" << std::endl;
     while (std::getline(mailToDisplay, mailText))
     {
@@ -277,7 +277,7 @@ void MailClient::displaySentMails()
     }
 
     //since this is sent mails, nothing more can be done 
-    std::cout << "Press any button to continue" << std::endl;
+    std::cout << "Press enter button to continue" << std::endl;
     std::cin.get();
     std::cin.get();
 }
@@ -300,7 +300,7 @@ void MailClient::displayFlagMails()
     {
         std::cout << "The Flag_Mails folder is empty" << std::endl;
         content.close();
-        std::cout << "Press any button to continue" << std::endl;
+        std::cout << "Press enter button to continue" << std::endl;
         std::cin.get();
         std::cin.get();
         return;
@@ -321,7 +321,7 @@ void MailClient::displayFlagMails()
         std::cout << mailText << std::endl;
     }
 
-    std::cout << "Press any button to continue" << std::endl;
+    std::cout << "Press enter button to continue" << std::endl;
     std::cin.get();
     std::cin.get();
 }
@@ -347,7 +347,7 @@ void MailClient::displayInbox()
         std::cout << "The Inbox is empty" << std::endl;
         content.close();
 
-        std::cout << "Press any button to continue" << std::endl;
+        std::cout << "Press enter button to continue" << std::endl;
         std::cin.get();
         std::cin.get();
         return;
@@ -368,7 +368,7 @@ void MailClient::displayInbox()
         std::cout << mailText << std::endl;
     }
 
-    std::cout << "Press any button to continue" << std::endl;
+    std::cout << "Press enter button to continue" << std::endl;
     std::cin.get();
     std::cin.get();
 
@@ -415,7 +415,7 @@ void MailClient::displayInbox()
         }
     }
     
-    std::cout << "Press any button to continue" << std::endl;
+    std::cout << "Press enter button to continue" << std::endl;
     std::cin.get();        
     std::cin.get();        
     content.close();
@@ -482,7 +482,7 @@ void MailClient::replyMail(std::string mail)
     std::cout << "Write the topic of the mail in one word with maximum 40 characters" << std::endl; //possible to insert above
     std::cin >> topic;
 
-    std::cout << "Press any button to continue" << std::endl;
+    std::cout << "Press enter button to continue" << std::endl;
     std::cin.get();
     std::cin.get();
 
@@ -534,7 +534,6 @@ void MailClient::deleteMail(std::string mail)
     std::string inbox;
     std::fstream temp;
 	temp.open("Inbox/temp.txt", std::fstream::out);
-    
     //copies everything from content.txt to temp.txt
     while (std::getline(content, inbox))
     {   
@@ -543,7 +542,6 @@ void MailClient::deleteMail(std::string mail)
             temp << inbox << std::endl;
         }
         
-        
     } 
     content.close();
     temp.close();
@@ -551,7 +549,6 @@ void MailClient::deleteMail(std::string mail)
     //deletes content.txt and renames temp.txt to content.txt 
     std::remove("Inbox/content.txt");
     std::rename("Inbox/temp.txt", "Inbox/content.txt");
-
 
     olc::net::message<CustomMsgTypes> msg;
     msg.header.id = CustomMsgTypes::deleteMail;
@@ -581,7 +578,6 @@ bool MailClient::createDraft()
     std::cout << "Write the topic of the mail in one word with maximum 40 characters" << std::endl;
     std::cin >> topic;
 
-    std::cout << "Press any button to continue" << std::endl;
     std::cin.get();
     std::cin.get();
 
@@ -645,9 +641,16 @@ bool MailClient::createDraft()
     //sending the mail 
     else if (send == true)
     {
-        std::ofstream draftFil("Send_Mails/" + fileName + ".txt"); //creating the file 
+        std::ofstream draftFil("Sent_Mails/" + fileName + ".txt"); //creating the file 
         draftFil << draftText;
         draftFil.close();
+
+        //inserting the topic into content.txt
+        std::fstream content;
+	    content.open("Sent_Mails/content.txt", std::fstream::app);
+	    content << fileName << ".txt" << "\n";
+        content.close();
+
         sendMail(mailType::send, topic);
 
         return false;
