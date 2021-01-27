@@ -25,12 +25,13 @@ Setup and Simulation
 In order to run the system om your computer, first make sure that you are booted on the Ubuntu OS, or you are running a virtual version similar thereof.  
 Then open the github repository found at:  
 https://github.com/Basaron/Mail-Server-client  
-Download the entire repository and extract the content to your wanted directory. From here open a terminal from the \textbf{Server1} folder and run the executable with the command:  
+Download the entire repository and extract the content to your wanted directory. From here open a terminal from the Server1 folder and run the executable with the command:  
 $ ./Server  
-Once the server is running, exit the \textbf{Server1}, and open the \textbf{Client1} folder. Open a terminal from this directory and run the executable with the following command:  
+Once the server is running, exit the Server1, and open the Client1 folder. Open a terminal from this directory and run the executable with the following command:  
 $ ./Client  
 Repeat this step in the two other Client folders Client2 and Client3.  
 Note that only 2 clients are needed for the system to work.  
+
 Now everything should be up and running and the system can be navigated with both clients. To exit any running Clients or Servers highlight the corresponding terminal and press ctrl + c.  
 
 If the above does not run the server and client executable, you must run a few installations. The required installations to run the system:  
@@ -40,7 +41,7 @@ If the above does not run the server and client executable, you must run a few i
  - pThreads  
 
 
-Once these installations have been made you will have to compile the system before running the executable files. To compile use the following commands:\\
+Once these installations have been made you will have to compile the system before running the executable files. To compile use the following commands:  
 Clients:  
 $ c++ -o Client MailClient.cpp -std=gnu++2a -pthread ./Client  
 
